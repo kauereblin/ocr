@@ -93,7 +93,14 @@ function localOcriaModelsPlugin() {
   };
 }
 
+function resolveBasePath(raw?: string): string {
+  if (!raw) return "/";
+  const trimmed = raw.trim().replace(/^\/+|\/+$/g, "");
+  return trimmed ? `/${trimmed}/` : "/";
+}
+
 export default defineConfig({
+  base: resolveBasePath(process.env.VITE_BASE_PATH),
   cacheDir: ".vite-cache",
   plugins: [react(), localOcriaModelsPlugin()],
   optimizeDeps: {

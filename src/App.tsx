@@ -193,7 +193,10 @@ export function App() {
           pdfBuffer,
           options,
           profile,
-          originUrl: window.location.origin,
+          originUrl: new URL(
+            import.meta.env.BASE_URL,
+            window.location.origin
+          ).href.replace(/\/+$/, ""),
         };
 
         // Zero-copy Transferable: immediately detaches pdfBuffer from main thread
